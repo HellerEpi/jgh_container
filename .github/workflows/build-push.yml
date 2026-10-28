@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: $${{ env.REGISTRY }}/$${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest
             type=raw,value={{date 'YYYY-MM-DD'}}
@@ -43,4 +43,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          push
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
