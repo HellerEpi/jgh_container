@@ -24,9 +24,9 @@ COPY install_packages.R /tmp/install_packages.R
 RUN Rscript /tmp/install_packages.R
 
 # Install Stan/CmdStan/R
-RUN R -e `install_packages("cmdstanr", repos = c("https://stan-dev.r-univers.dev","https://cloud.r-project.org"))`
-RUN R -e `cmdstanr::install_cmdstan(cores = 2)`
-RUN R -e `cmdstanr::cmdstan_version()`
+RUN R -e 'install.packages("cmdstanr", repos = c("https://stan-dev.r-univers.dev","https://cloud.r-project.org"))'
+RUN R -e 'cmdstanr::install_cmdstan(cores = 2)'
+RUN R -e 'cmdstanr::cmdstan_version()'
 
 WORKDIR /project
 CMD ["R"]
